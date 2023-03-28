@@ -16,14 +16,15 @@ const Popularjobs = () => {
   const { data, isLoading, error } = useFetch(
     'search', { 
       // limit: 10, page: 1, sort: 'date_posted', order: 'desc' 
-      query: 'React developer',
+      query: 'React',
       num_pages: 1,
   })
 
   const [selectedJob, setSelectedJob] = useState();
 
-  const handleCardPress = (items) => {
-
+  const handleCardPress = (item) => {
+    router.push(`/job-details/${item?.job_id}`);
+    setSelectedJob(item.job_id)
   }
 
   return (
@@ -63,7 +64,7 @@ const Popularjobs = () => {
               />
             )}
             //key Extractor is a function that returns a unique key for each item in the array
-            keyExtractor={item => item?.job_id}
+            keyExtractor={(item) => item?.job_id}
             contentContainerStyle={{ columnGap: SIZES.medium }}
             horizontal
           />

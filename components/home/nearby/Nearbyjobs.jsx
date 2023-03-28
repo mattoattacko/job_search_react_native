@@ -13,7 +13,7 @@ const Nearbyjobs = () => {
   const { data, isLoading, error } = useFetch(
     'search', { 
       // limit: 10, page: 1, sort: 'date_posted', order: 'desc' 
-      query: 'React developer',
+      query: 'React',
       num_pages: 1
   })
 
