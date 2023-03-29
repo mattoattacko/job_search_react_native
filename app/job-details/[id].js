@@ -7,6 +7,8 @@ import { Company, JobAbout, JobFooter, JobTabs, ScreenHeaderBtn, Specifics } fro
 import { COLORS, SIZES, icons } from '../../constants';
 import useFetch from '../../hook/useFetch.js';
 
+const tabs = ['About', 'Qualifications', 'Responsibilities'];
+
 const JobDetails = () => {
   const params = useSearchParams(); //lets us get specific ID of the job details page we are on
   const router = useRouter();
@@ -15,12 +17,35 @@ const JobDetails = () => {
   const { data, isLoading, error, refetch } = useFetch(
     'job-details', { job_id: params.id }
   )
-
   //refresh control
   const [refreshing, setRefreshing] = useState(false);
+  //which tab is currently active
+  const [activeTab, setActiveTab] = useState(tabs[0]); //tabs0 is 'About' section
 
   const onRefresh = () => {
 
+  }
+
+  const displayTabContent = () => {
+    switch (activeTab) {
+      // if we are on the qualifications tab, we return the Specifics component
+      case 'Qualifications':
+        return <Specifics 
+          title='Qualifications'
+          points={data[0].job_highlights?.Qualifications ?? ['No Data']}  //if the qualifications dont exist, we return 'No Data'. The API is the one that calls Qualifications with a capitol letter
+        />
+      case 'About':
+        return <JobAbout 
+          info={data[0].job_description ?? 'No Data Provided'}
+        />
+      case 'Responsibilities':
+        return <Specifics 
+          title='Responsibilities'
+          points={data[0].job_highlights?.Responsibilities ?? ['No Data']}
+        />
+      default:
+      break;
+    }
   }
 
   return (
@@ -75,11 +100,22 @@ const JobDetails = () => {
               />
 
               <JobTabs 
-
+                tabs={tabs}
+                activeTab={activeTab}
+                setActiveTab={setActiveTab}
               />
+
+              {/* Tab Content */}
+              {displayTabContent()}
             </View>
           )}
         </ScrollView>
+
+        {/* Open new tab to apply for position */}
+        {/* we pass in a URL (job_google_link) which is the actual link of the job. Or if not, we go to another job link as a fallback */}
+        <JobFooter 
+          url={data[0]?.job_google_link ?? "https://careers.google.com/jobs/results"}
+        />
       </>
     </SafeAreaView>
   );
