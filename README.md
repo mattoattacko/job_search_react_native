@@ -4,9 +4,9 @@ https://expo.dev/@mattoattacko/react_native_jobs_app?serviceType=classic&distrib
 
 # React Native Job Search
 
-<img src='https://i.imgur.com/v4Nh4o5.png' />
+<img src='https://i.imgur.com/cOgWIyN.png' />
 
-<img src='https://i.imgur.com/K1uGvb4.png' />
+<img src='https://i.imgur.com/ibG9kwz.png' />
 
 ## 🚀 How to use
 
