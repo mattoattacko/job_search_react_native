@@ -11,14 +11,13 @@ import {
 } from '../components';
 
 const Home = () => {
-
-  //find our router
   const router = useRouter();
+  const [searchTerm, setSearchTerm] = useState('');
 
   return (
     <SafeAreaView
       style={{
-        flex: 1,
+        flex: 2,
         backgroundColor: COLORS.lightWhite,
       }}
     >
@@ -40,7 +39,7 @@ const Home = () => {
               dimension='100%'
             />
           ),
-          headerTitle: '', //empty string to remove the word 'title'
+          headerTitle: "" //empty string to remove the word 'title'
         }}
       />
 
@@ -52,7 +51,14 @@ const Home = () => {
           }}
         >
           <Welcome 
-
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+            handleClick={() => {
+              // if searchTerm is not empty, navigate to search screen
+              if(searchTerm) { 
+                router.push(`/search/${searchTerm}`)
+              }
+            }}
           />
 
           <Popularjobs />

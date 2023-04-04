@@ -22,9 +22,12 @@ const JobDetails = () => {
   //which tab is currently active
   const [activeTab, setActiveTab] = useState(tabs[0]); //tabs0 is 'About' section
 
-  const onRefresh = () => {
-
-  }
+  // onRefresh function will make sure we dont have to wait for the data to be fetched before we can refresh the page
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    refetch();
+    setRefreshing(false);
+  }, []);
 
   const displayTabContent = () => {
     switch (activeTab) {

@@ -12,9 +12,9 @@ import { useRouter } from 'expo-router';
 import styles from './welcome.style'
 import { icons, SIZES } from '../../../constants';
 
-const jobTypes = ['Full-Time', 'Part-Time', 'Contractor', 'Internship']
+const jobTypes = ['Full-Time', 'Part-Time', 'Contractor']
 
-const Welcome = () => {
+const Welcome = ({ searchTerm, setSearchTerm, handleClick }) => {
   const router = useRouter();
   const [activeJobType, setActiveJobType] = useState('Full-Time')
 
@@ -34,15 +34,16 @@ const Welcome = () => {
         <View style={styles.searchWrapper}>
           <TextInput 
             style={styles.searchInput}
-            value=''
-            onChange={() => {}}
+            value={searchTerm}
+            onChangeText={(text) => setSearchTerm(text)} //in react native we dont need to do the e.target.value thing. 
+            //we need to call it onChangeText and not just OnChange else we will get [Object object] in the input field when it loads.
             placeholder='What are you looking for?'
           />
         </View>
 
         <TouchableOpacity 
           style={styles.searchBtn}
-          onPress={() => {}}
+          onPress={handleClick}
         >
           <Image 
             source={icons.search}
