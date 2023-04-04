@@ -1,3 +1,7 @@
+Project found at: 
+
+https://expo.dev/@mattoattacko/react_native_jobs_app?serviceType=classic&distribution=expo-go
+
 # Expo Router Example
 
 Use [`expo-router`](https://expo.github.io/router) to build native navigation using files in the `app/` directory.
